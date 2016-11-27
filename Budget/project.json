@@ -1,6 +1,11 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
+    "EntityFramework": "6.1.3",
+    "EntityFramework.Commands": "7.0.0-rc1-final",
+    "EntityFramework.SQLite": "7.0.0-rc1-final",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+    "SQLite.Net-PCL": "3.1.1",
+    "System.Data.SQLite": "1.0.103"
   },
   "frameworks": {
     "uap10.0": {}
