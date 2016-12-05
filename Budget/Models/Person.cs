@@ -12,6 +12,7 @@ namespace Budget.Models
         [Key]
         public int PersonId { get; set; }
         public string Name { get; set; }
+        //public int? HouseholdId { get; set; }
 
         public virtual List<Income> IncomeByPerson { get; set; }
         public virtual List<Expense> ExpensesByPerson { get; set; }

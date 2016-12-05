@@ -30,8 +30,6 @@ namespace Budget.Views
         {
             this.InitializeComponent();
             _viewModel = new FrontViewModel();
-            //DatabaseManager.DatabaseSetup();
-            //if(DatabaseManager.databaseExists)
             FillGUI();
             SetGUI();
         }
@@ -43,10 +41,9 @@ namespace Budget.Views
 
         private void SetGUI()
         {
-            if(_viewModel.Households.Count() > 0)
+            if (_viewModel.Households.Count() > 0)
             {
                 LstBxHouseholds.Visibility = Visibility.Visible;
-                BtnTakeControl.Visibility = Visibility.Visible;
                 TxtblInstruction.Text = "Choose a household from the list and click the button to take control, or click 'Households' from the menu to create additional households.";
             }
             else
@@ -57,5 +54,18 @@ namespace Budget.Views
             }
         }
 
+        private void LstBxHouseholds_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (LstBxHouseholds.SelectedItem != null)
+            {
+                BtnTakeControl.Visibility = Visibility.Visible;
+                _viewModel.ChosenHousehold = (Household)LstBxHouseholds.SelectedItem;
+            }
+        }
+
+        private void BtnTakeControl_Click(object sender, RoutedEventArgs e)
+        {
+            // navigate to Income
+        }
     }
 }

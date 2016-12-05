@@ -48,5 +48,11 @@ namespace Budget
             var PersonPage = new PersonPage();
             MainFrame.Content = PersonPage;
         }
+
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
+        {
+            FrontPage frontpage = new FrontPage();
+            MainFrame.Content = frontpage;
+        }
     }
 }

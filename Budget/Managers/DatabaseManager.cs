@@ -62,22 +62,6 @@ namespace Budget
             }
         }
 
-        // Returns the number of rows of the Household table
-        public static int HasHouseholds()
-        {
-            using (var db = new BudgetContext())
-            {
-                var query = db.Households.Count();
-                return query;
-                //con.CreateCommand("SELECT count(*) FROM Household");
-                //count = con.ExecuteScalar<int>("SELECT count(*) FROM Household");
-                //SQLite.Net.SQLiteCommand cmd = new SQLite.Net.SQLiteCommand("SELECT count(*) FROM Household");
-                //SqliteCommand cmd = new SqliteCommand("SELECT count(*) FROM Household");
-                //count = Convert.ToInt32(cmd.ExecuteScalar());
-                //con.Close();
-            }
-        }
-
         // Creates the database, and checks if it worked
         private static void CreateDatabase()
         {
@@ -133,6 +117,43 @@ namespace Budget
             }
         }
 
+        public static Household GetHousehold(int id)
+        {
+            try
+            {
+                using (var db = new BudgetContext())
+                {
+                    return db.Households.First(x => x.HouseholdId == id);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle error
+            }
+            return null;
+        }
+
+
+        // Returns the number of rows of the Household table
+        public static int HasHouseholds()
+        {
+            try
+            {
+                using (var db = new BudgetContext())
+                {
+                    var query = db.Households.Count();
+                    return query;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle error
+            }
+            return -1;
+
+        }
+
+
         public static bool SaveHousehold(string name)
         {
             try
@@ -159,7 +180,7 @@ namespace Budget
             {
                 using (var db = new BudgetContext())
                 {
-                    var household = db.Households.Single(x => x.HouseholdId == id);
+                    var household = db.Households.First(x => x.HouseholdId == id);
                     db.Households.Remove(household);
                     db.Entry(household).State = EntityState.Deleted;
                     db.SaveChanges();
@@ -179,7 +200,7 @@ namespace Budget
             {
                 using (var db = new BudgetContext())
                 {
-                    var household = db.Households.Single(x => x.HouseholdId == id);
+                    var household = db.Households.First(x => x.HouseholdId == id);
                     household.HouseholdName = name;
                     db.Households.Update(household);
                     db.Entry(household).State = EntityState.Modified;
@@ -196,5 +217,148 @@ namespace Budget
 
 
         #endregion
+
+        #region Persons
+
+        public static Person GetPerson(int id)
+        {
+            try
+            {
+                using (var db = new BudgetContext())
+                {
+                    return db.Persons.First(x => x.PersonId == id);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle error
+            }
+            return null;
+        }
+
+        public static List<Person> GetPersons()
+        {
+            try
+            {
+                using (var db = new BudgetContext())
+                {
+                    return db.Persons.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle error
+            }
+            return null;
+        }
+
+        public static bool SavePerson(string name)
+        {
+            try
+            {
+                using (var db = new BudgetContext())
+                {
+                    var person = new Person { Name = name };
+                    db.Persons.Add(person);
+                    db.Entry(person).State = EntityState.Added;
+                    db.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Handle error
+            }
+            return false;
+        }
+
+        public static bool DeletePerson(int id)
+        {
+            try
+            {
+                using (var db = new BudgetContext())
+                {
+                    var person = db.Persons.First(x => x.PersonId == id);
+                    db.Persons.Remove(person);
+                    db.Entry(person).State = EntityState.Deleted;
+                    db.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Handle error
+            }
+            return false;
+        }
+
+        public static bool UpdatePerson(int id, string name)
+        {
+            try
+            {
+                using (var db = new BudgetContext())
+                {
+                    var person = db.Persons.First(x => x.PersonId == id);
+                    person.Name = name;
+                    db.Persons.Update(person);
+                    db.Entry(person).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Handle error
+            }
+            return false;
+        }
+
+        public static bool AttachPerson(Person person, Household household)
+        {
+            try
+            {
+                using (var db = new BudgetContext())
+                {
+                    if (household.PersonsInHousehold == null)
+                    {
+                        household.PersonsInHousehold = new List<Person>();
+                    }
+                    household.PersonsInHousehold.Add(person);
+                    db.Households.Update(household);
+                    db.Entry(household).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Handle error
+            }
+            return false;
+        }
+
+        public static bool DetachPerson(Person person, Household household)
+        {
+            try
+            {
+                using (var db = new BudgetContext())
+                {
+                    household.PersonsInHousehold.Remove(person);
+                    db.Households.Update(household);
+                    db.Entry(household).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Handle error
+            }
+            return false;
+        }
+
+        #endregion
+
+
     }
 }

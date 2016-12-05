@@ -12,12 +12,17 @@
             <StackPanel Background="Gray" Orientation="Vertical">
                 <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE825;" Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" />
                 <StackPanel Orientation="Horizontal">
-                    <Button x:Name="HouseholdButton" FontFamily="Segoe MDL2 Assets" Content="&#xE80F;" Width="50" Height="50" Background="Transparent" Click="HouseholdButton_Click"/>
+                    <Button x:Name="HouseholdButton" FontFamily="Segoe MDL2 Assets" Content="&#xE913;" Width="50" Height="50" Background="Transparent" Click="HouseholdButton_Click"/>
                     <TextBlock Text="Households" FontSize="18" VerticalAlignment="Center" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="PersonButton" FontFamily="Segoe MDL2 Assets" Content="&#xE716;" Width="50" Height="50" Background="Transparent" Click="PersonButton_Click" />
                     <TextBlock Text="Persons" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <Line StrokeThickness="3" Stroke="LawnGreen" Margin="10" Fill="White"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="HomeButton" FontFamily="Segoe MDL2 Assets" Content="&#xE80F;" Width="50" Height="50" Background="Transparent" Click="HomeButton_Click" />
+                    <TextBlock Text="Home" FontSize="18" VerticalAlignment="Center" />
                 </StackPanel>
             </StackPanel>
         </SplitView.Pane>

@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Budget.Interfaces
+namespace Budget.Managers
 {
-    public interface IHousehold
+    class ErrorManager
     {
-        double GetIncome();
-
-
     }
 }

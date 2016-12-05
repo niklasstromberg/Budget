@@ -13,10 +13,10 @@ namespace Budget.Models
         [Key]
         public int HouseholdId { get; set; }
         public string HouseholdName { get; set; }
-        public virtual List<Person> PersonsInHousehold { get;  set; }
+        public virtual List<Person> PersonsInHousehold { get; set; }
 
         // Get the total income for the household
-        public double GetIncome(IHousehold household)
+        public double GetIncome()
         {
             double totalIncome = 0;
             foreach(Person person in PersonsInHousehold)
@@ -28,6 +28,5 @@ namespace Budget.Models
             }
             return totalIncome;
         }
-
     }
 }

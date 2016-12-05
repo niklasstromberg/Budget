@@ -3,6 +3,7 @@ using Budget.ViewModels;
 using Microsoft.Data.Entity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -32,18 +33,18 @@ namespace Budget.Views
         {
             this.InitializeComponent();
             _viewModel = new HouseholdViewModel();
-            FillGUI();
+            GetData();
             SetGUI();
         }
 
-        private void FillGUI()
+        private void GetData()
         {
             LstBxHouseholds.ItemsSource = _viewModel.Households;
         }
 
         private void SetGUI()
         {
-            FillGUI();
+            //FillGUI();
             LstBxHouseholds.SelectedItem = null;
             TxtBxName.Text = "";
             if (_viewModel.Households.Count < 1)
@@ -76,7 +77,7 @@ namespace Budget.Views
         {
             bool success = false;
 
-            if(LstBxHouseholds.SelectedItem != null)
+            if (LstBxHouseholds.SelectedItem != null)
             {
                 var household = (Household)LstBxHouseholds.SelectedItem;
                 success = DatabaseManager.UpdateHousehold(household.HouseholdId, TxtBxName.Text);
@@ -86,9 +87,9 @@ namespace Budget.Views
                 success = DatabaseManager.SaveHousehold(TxtBxName.Text);
             }
 
-            if (success)
-                //_viewModel.Propertychanged();
-                SetGUI();
+            if (success) { }
+                //_viewModel.RaiseOnPropertyChanged();
+            //SetGUI();
         }
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -97,7 +98,10 @@ namespace Budget.Views
             int id = household.HouseholdId;
             bool success = DatabaseManager.DeleteHousehold(id);
             if (success)
-                SetGUI();
+            {
+                //_viewModel.RaiseOnPropertyChanged();
+            }
+            //SetGUI();
         }
 
         private void LstBxHouseholds_SelectionChanged(object sender, SelectionChangedEventArgs e)

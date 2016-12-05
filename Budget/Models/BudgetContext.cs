@@ -35,8 +35,6 @@ namespace Budget.Models
             var connection = new SqliteConnection(connectionString);
 
             optionsBuilder.UseSqlite(connection);
-
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -44,6 +42,9 @@ namespace Budget.Models
             // Household
             modelBuilder.Entity<Household>()
                 .HasMany<Person>();
+            modelBuilder.Entity<Household>()
+                .Property(p => p.HouseholdId)
+                .IsRequired();
                 
             // Person
             modelBuilder.Entity<Person>()

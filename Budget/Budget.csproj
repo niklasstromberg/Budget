@@ -107,6 +107,8 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Managers\ErrorManager.cs" />
+    <Compile Include="Managers\NotificationManager.cs" />
     <Compile Include="Migrations\20160613120401_InitialMigration.cs" />
     <Compile Include="Migrations\20160613120401_InitialMigration.designer.cs">
       <DependentUpon>20160613120401_InitialMigration.cs</DependentUpon>
@@ -131,6 +133,9 @@
     </Compile>
     <Compile Include="Views\Household01.xaml.cs">
       <DependentUpon>Household01.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IncomePage.xaml.cs">
+      <DependentUpon>IncomePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PersonPage.xaml.cs">
       <DependentUpon>PersonPage.xaml</DependentUpon>
@@ -170,6 +175,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\IncomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PersonPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -177,6 +186,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
