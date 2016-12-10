@@ -11,7 +11,7 @@ using Budget.Models;
 using Microsoft.Data.Entity;
 using Budget.Interfaces;
 
-namespace Budget
+namespace Budget.Managers
 {
     public static class DatabaseManager
     {
@@ -214,6 +214,34 @@ namespace Budget
             }
             return false;
         }
+
+        public static List<Person> GetPersonsInHousehold(Household household)
+        {
+            List<Person> result = new List<Person>();
+            try
+            {
+                var con = new SqliteConnection("DataSource=Budget.db");
+                con.Open();
+                string sql = "Select * from Person Where HouseholdHouseholdId = " + household.HouseholdId;
+                SqliteCommand cmd = new SqliteCommand(sql, con);
+                var toRead = cmd.ExecuteReader();
+                while (toRead.Read())
+                {
+                    //result.Add()
+                }
+                using (var db = new BudgetContext())
+                {
+                    //result = db.Persons.Where(p => p.HouseholdHouseholdID == household.HouseholdId).ToList();
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // Handle error
+            }
+            return result;
+        }
+
 
 
         #endregion

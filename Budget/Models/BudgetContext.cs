@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Common;
 
 namespace Budget.Models
 {
@@ -50,6 +51,8 @@ namespace Budget.Models
             modelBuilder.Entity<Person>()
                 .Property(p => p.PersonId)
                 .IsRequired();
+            //modelBuilder.Entity<Person>()
+            //    .HasMany<Household>();
 
             // Income
             modelBuilder.Entity<Income>()

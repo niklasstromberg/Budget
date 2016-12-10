@@ -1,4 +1,5 @@
-﻿using Budget.Models;
+﻿using Budget.Managers;
+using Budget.Models;
 using Budget.ViewModels;
 using Microsoft.Data.Entity;
 using System;

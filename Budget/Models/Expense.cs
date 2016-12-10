@@ -16,7 +16,7 @@ namespace Budget.Models
         public int CategoryId { get; set; }
         public DateTime Date { get; set; }
         public int? PersonId { get; set; }
-
+        public Household Household { get; set; }
         public string Notes { get; set; }
 
         public virtual Person person { get; set; }
